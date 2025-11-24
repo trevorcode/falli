@@ -86,36 +86,6 @@
                     ". But actually received: "
                     value)])))
 
-(comment 
- (local tests 
-        [(validate :string "Hello")
-         (validate :number 5)
-         (validate :boolean true)
-         (validate :nil nil)
-         (validate [:enum "Hi" 5] "Hi")
-         (validate [:table [:name :string]] {:name "Dale"})
-         (validate [:table
-                    [:name :string]
-                    [:height :number]
-                    [:numbers [:list :number]]
-                    [:properties [:table [:one :string]]]]
-                   {:height 50
-                    :name "Okay"
-                    :numbers [5]
-                    :properties {:one "ok"}})
-         (validate [:list [:enum 1 2 3 4 :five]] [1 2 3 4 :five])
-
-         (validate [:table [:name :? :string]] {})
-         (validate (fn [x] (< 0 x)) 1)
-         (validate [:list (fn [x] (< 0 x))] [1 3 4])
-         (validate [:table [:count (fn [x] (< 0 x))]] {:count 3})
-         (validate :table [])
-
-         ])
- (each [_ t (pairs tests)]
-   (assert (= :valid t) "error"))
-
- )
 
 
 {: validate}
