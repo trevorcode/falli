@@ -66,8 +66,8 @@
               (icollect [i v (ipairs value)]
                 (let [result (validate sub-schema v (.. "index " i))]
                   (case result
-                    [:error _] result
-                    :valid nil)))]
+                    :valid nil
+                    _ result)))]
           (if (< 0 (length list-result))
               list-result
               :valid)
@@ -109,7 +109,5 @@
                     (or ?value-name "")
                     ". But actually received: "
                     value)])))
-
-
 
 {: validate}
