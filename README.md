@@ -118,6 +118,7 @@ The `:list` pattern ultimately takes in another schema and checks each element i
           [{:name "Joe"}
            {:name "Jill"}
            {:name "Jack"}])
+;; :valid
 ```
 
 ## Function schema
