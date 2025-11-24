@@ -40,6 +40,21 @@
               :numbers [5 4 3]
               :properties {:one "ok"}})))
 
+(fn test-table-optional []
+  (local schema [:table
+                 [:name :string]
+                 [:count :number]])
+
+  (expect-valid (validate schema {:name "Jen" :count 5}))
+  (t.= (validate schema {:name "Jen"}) {:count ["error" "Expected missing field 'count'"]})
+
+  (local schema2 [:table
+                 [:name :string]
+                 [:count :? :number] ;; :? makes this optional
+                 ])
+
+  (expect-valid (validate schema2 {:name "Jen"})))
+
 (fn test-list []
   (expect-valid (validate [:list [:enum 1 2 3 4 :five]] [1 2 3 4 :five]))
   (expect-valid (validate [:list :number] [10 20 30 40 50]))
@@ -54,4 +69,4 @@
   (expect-valid (validate [:list (fn [x] (< 0 x))] [1 3 4])))
 
 {: test-primitive-types : test-enum
- : test-table : test-list : test-fn}
+ : test-table : test-table-optional : test-list : test-fn}

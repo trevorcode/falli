@@ -72,6 +72,34 @@ Tables in this context refer to "maps" or fennel tables that have key values in 
 ;; :valid
 ```
 
+### Optional fields
+
+Fields can be made optional by adding the `:?` keyword 
+
+`[:table [:name :? :string]]`
+
+```clojure
+(local schema [:table
+                 [:name :string]
+                 [:count :number]])
+
+(validate schema {:name "Jen" :count 5})
+;; :valid
+
+(validate schema {:name "Jen"})
+;; => {:count ["error" "Expected missing field 'count'"]}
+
+(local schema2 [:table
+                 [:name :string]
+                 [:count :? :number] ;; :? makes this optional
+                 ])
+
+(validate schema2 {:name "Jen"})
+;; :valid
+
+```
+
+
 ## List
 
 Lists and tables are the same in lua, however in fennel, these are distinguished syntactically. `[]` for "lists" `{}` for "tables".
