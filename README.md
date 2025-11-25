@@ -11,7 +11,7 @@ Falli is inspired by malli (clojure schema library). Schemas are NOT intended to
 ## Primitive types 
 
 ```clojure
-(local falli (require :falli))
+(local {: validate} (require :falli))
 
 (validate :number 5)
 ;; Returns :valid
@@ -28,7 +28,7 @@ Falli is inspired by malli (clojure schema library). Schemas are NOT intended to
 
 ## Enums
 
-Enums are a "set of primitive (may change this later?) values"
+Enums are a "set of literal" values
 
 ```clojure
 (validate [:enum "Hi" 5] "Hi")
